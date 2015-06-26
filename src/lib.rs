@@ -3,7 +3,11 @@
 //! termsize is a tiny crate that provides a simple
 //! interface for setting and retrieving the current
 //! terminal interface size
-
+//!
+//! ```rust
+//!  extern crate termsize;
+//!  termsize::get().map(|size| println!("width {} height {}", size.width, size.height));
+//! ```
 extern crate libc;
 
 use libc::{ c_ulong, c_ushort, STDOUT_FILENO };
@@ -16,8 +20,10 @@ const TIOCSWINSZ: c_ulong = 2148037735;
 #[repr(C)]
 #[derive(Debug)]
 pub struct Size {
-  height: c_ushort,
-  width: c_ushort,
+  /// height of size in rows
+  pub height: c_ushort,
+  /// width of size in columns
+  pub width: c_ushort,
   x: c_ushort,
   y: c_ushort
 }
