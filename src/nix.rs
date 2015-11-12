@@ -1,7 +1,7 @@
 extern crate libc;
 
 use self::super::Size;
-use self::libc::{c_ulong, c_ushort, STDOUT_FILENO};
+use self::libc::{c_int, c_ulong, c_ushort, STDOUT_FILENO};
 use self::libc::ioctl;
 
 #[cfg(not(target_os = "macos"))]
