@@ -2,6 +2,10 @@
 name = "termsize"
 version = "0.1.0"
 authors = ["softprops <d.tangren@gmail.com>"]
+description = "Retrieves terminal size"
+repository = "https://github.com/softprops/termsize"
+keywords = ["unix", "tty", "terminal", "console", "term", "size", "dimensions"]
+license = "MIT"
 
 [dependencies]
-libc = "0.1"
+libc = "0.2"
