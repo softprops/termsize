@@ -1,11 +1,11 @@
 extern crate libc;
 
 use self::super::Size;
-use self::libc::{c_int, c_ulong, c_ushort, STDOUT_FILENO};
+use self::libc::{c_ulong, c_ushort, STDOUT_FILENO};
 use self::libc::ioctl;
 
 #[cfg(not(target_os = "macos"))]
-const TIOCGWINSZ: c_int = 0x00005413;
+const TIOCGWINSZ: c_ulong = 0x00005413;
 
 #[cfg(target_os = "macos")]
 const TIOCGWINSZ: c_ulong = 0x40087468;
