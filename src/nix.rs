@@ -25,6 +25,7 @@ pub struct UnixSize {
 
 /// Gets the current terminal size
 pub fn get() -> Option<Size> {
+  // http://rosettacode.org/wiki/Terminal_control/Dimensions#Library:_BSD_libc
   let us = UnixSize { rows: 0, cols: 0, x: 0, y: 0 };
   let r = unsafe { ioctl(STDOUT_FILENO, TIOCGWINSZ, &us) };
   if r == 0 { Some(Size { rows: us.rows, cols: us.cols }) } else { None }
