@@ -4,12 +4,19 @@
 
 > because terminal size matters
 
+## api docs
+
+Find them [here](https://softprops.github.com/termsize)
+
+## usage
+
 ```rust
-extern crate termize;
+extern crate termsize;
 
 pub fn main() {
-  let size = termsize::get().unwrap();
-  println!("{} rows {} columns", size.rows, size.colums);
+  termsize::get().map(|size| {
+    println!("rows {} cols {}", size.rows, size.cols)
+  });
 }
 ```
 
