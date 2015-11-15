@@ -36,8 +36,7 @@ pub fn get() -> Option<Size> {
 
 #[cfg(test)]
 mod tests {
-    use std::process::{Command, Output};
-    use std::process::Stdio;
+    use std::process::{Command, Output, Stdio};
     use super::super::Size;
     use super::get;
 
