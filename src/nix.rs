@@ -36,20 +36,34 @@ pub fn get() -> Option<Size> {
 
 #[cfg(test)]
 mod tests {
-    use std::process::Command;
+    use std::process::{Command, Output};
     use std::process::Stdio;
     use super::super::Size;
     use super::get;
 
-    #[test]
     #[cfg(target_os = "macos")]
-    fn test_shell() {
-        let output = Command::new("stty")
+    fn stty_size() -> Output {
+        Command::new("stty")
             .arg("-f").arg("/dev/stderr")
             .arg("size")
             .stderr(Stdio::inherit())
             .output()
-            .unwrap();
+            .unwrap()
+    }
+
+    #[cfg(not(target_os = "macos"))]
+    fn stty_size() -> Output {
+        Command::new("stty")
+            .arg("-f").arg("/dev/stderr")
+            .arg("size")
+            .stderr(Stdio::inherit())
+            .output()
+            .unwrap()
+    }
+
+    #[test]
+    fn test_shell() {
+        let output = stty_size();
         assert!(output.status.success());
         let stdout = String::from_utf8(
              output.stdout
