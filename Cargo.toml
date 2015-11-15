@@ -6,7 +6,7 @@ description = "Retrieves terminal size"
 repository = "https://github.com/softprops/termsize"
 homepage = "https://github.com/softprops/termsize"
 documentation = "http://softprops.github.io/termsize"
-keywords = ["unix", "tty", "terminal", "console", "term", "size", "dimensions"]
+keywords = ["tty", "terminal", "term", "size", "dimensions"]
 license = "MIT"
 
 [dependencies]
