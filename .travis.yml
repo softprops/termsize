@@ -17,6 +17,9 @@ addons:
     - libcurl4-openssl-dev
     - libelf-dev
     - libdw-dev
+os:
+ - linux
+ - osx
 script:
 - cargo build
 - cargo test
