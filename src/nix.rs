@@ -54,7 +54,7 @@ mod tests {
     #[cfg(not(target_os = "macos"))]
     fn stty_size() -> Output {
         Command::new("stty")
-            .arg("-f").arg("/dev/stderr")
+            .arg("-F").arg("/dev/stderr")
             .arg("size")
             .stderr(Stdio::inherit())
             .output()
