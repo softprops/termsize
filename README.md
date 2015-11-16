@@ -7,6 +7,15 @@
 Termsize is a rust crate providing a multi-platform interface for resolving
 your terminal's current size in rows and columns. On most unix systems, this is similar invoking the [stty(1)](http://man7.org/linux/man-pages/man1/stty.1.html) program, requesting the terminal size.
 
+## install
+
+add the following to your `Cargo.toml` file
+
+```toml
+[dependencies]
+termsize = "0.1"
+```
+
 ## api docs
 
 Find them [here](https://softprops.github.com/termsize)
