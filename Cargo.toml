@@ -9,8 +9,30 @@ documentation = "http://softprops.github.io/termsize"
 keywords = ["tty", "terminal", "term", "size", "dimensions"]
 license = "MIT"
 
-[dependencies]
+[target.x86_64-apple-darwin.dependencies]
 atty = "0.1"
 libc = "0.2"
+
+[target.i686-unknown-linux-gnu.dependencies]
+atty = "0.1"
+libc = "0.2"
+
+[target.x86_64-unknown-linux-gnu.dependencies]
+atty = "0.1"
+libc = "0.2"
+
+[target.x86_64-pc-windows-msvc.dependencies]
+winapi = "0.2"
+kernel32-sys = "0.2"
+
+[target.i686-pc-windows-msvc.dependencies]
+winapi = "0.2"
+kernel32-sys = "0.2"
+
+[target.x86_64-pc-windows-gnu.dependencies]
+winapi = "0.2"
+kernel32-sys = "0.2"
+
+[target.i686-pc-windows-gnu.dependencies]
 winapi = "0.2"
 kernel32-sys = "0.2"

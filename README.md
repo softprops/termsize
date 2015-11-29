@@ -1,6 +1,6 @@
 # termsize
 
-[![Build Status](https://travis-ci.org/softprops/termsize.svg)](https://travis-ci.org/softprops/termsize)
+[![Build Status](https://travis-ci.org/softprops/termsize.svg)](https://travis-ci.org/softprops/termsize) [![Build status](https://ci.appveyor.com/api/projects/status/ilics7dppw0vl6gb?svg=true)](https://ci.appveyor.com/project/softprops/termsize)
 
 > because terminal size matters
 
