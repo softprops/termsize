@@ -24,8 +24,11 @@ pub fn get() -> Option<Size> {
         dwMaximumWindowSize: zc
     };
     let success: bool = unsafe {
-        GetConsoleScreenBufferInfo(stdout, &mut info) != 0
+        let result = GetConsoleScreenBufferInfo(stdout, &mut info);
+        println!("result was {}", result);
+        result != 0
     };
+    println!("info {:?}", info);
     if success {
         Some(
             Size {
