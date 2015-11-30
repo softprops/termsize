@@ -6,11 +6,11 @@ use self::super::Size;
 /// Gets the current terminal size
 pub fn get() -> Option<Size> {
     //http://rosettacode.org/wiki/Terminal_control/Dimensions#Windows
-    use self::winapi::{DWORD, HANDLE};
+    use self::winapi::HANDLE;
     use self::kernel32::{GetStdHandle, GetConsoleScreenBufferInfo};
     use self::winapi::{
         CONSOLE_SCREEN_BUFFER_INFO, COORD, SMALL_RECT,
-        STD_INPUT_HANDLE, STD_OUTPUT_HANDLE
+        STD_OUTPUT_HANDLE
     };
     let stdout: HANDLE = unsafe {
         GetStdHandle(STD_OUTPUT_HANDLE)
