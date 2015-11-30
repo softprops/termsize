@@ -7,7 +7,7 @@ use self::super::Size;
 pub fn get() -> Option<Size> {
     //http://rosettacode.org/wiki/Terminal_control/Dimensions#Windows
     use self::winapi::HANDLE;
-    use self::kernel32::{GetStdHandle, GetConsoleScreenBufferInfo};
+    use self::kernel32::{GetStdHandle, GetConsoleScreenBufferInfo, GetLastError};
     use self::winapi::{
         CONSOLE_SCREEN_BUFFER_INFO, COORD, SMALL_RECT,
         STD_OUTPUT_HANDLE, INVALID_HANDLE_VALUE
@@ -21,6 +21,8 @@ pub fn get() -> Option<Size> {
         return None
     }
     let zc = COORD { X: 0, Y: 0 };
+    // screen buffer info is a container of console display information
+    // https://msdn.microsoft.com/en-us/library/windows/desktop/ms682093(v=vs.85).aspx
     let mut info = CONSOLE_SCREEN_BUFFER_INFO {
         dwSize: zc.clone(),
         dwCursorPosition: zc.clone(),
@@ -29,8 +31,12 @@ pub fn get() -> Option<Size> {
         dwMaximumWindowSize: zc
     };
     let success: bool = unsafe {
+        // https://msdn.microsoft.com/en-us/library/windows/desktop/ms683171(v=vs.85).aspx
         let result = GetConsoleScreenBufferInfo(stdout, &mut info);
         println!("result was {}", result);
+        if result == 0 {
+            println!("last error was {:?}", GetLastError());
+        }
         result != 0
     };
     println!("info {:?}", info);
