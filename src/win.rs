@@ -34,31 +34,30 @@ pub fn get() -> Option<Size> {
     let zc = COORD { X: 0, Y: 0 };
     // screen buffer info is a container of console display information
     // https://msdn.microsoft.com/en-us/library/windows/desktop/ms682093(v=vs.85).aspx
-    let mut info = ::std::mem::uninitialized();/*CONSOLE_SCREEN_BUFFER_INFO {
+    /*CONSOLE_SCREEN_BUFFER_INFO {
         dwSize: zc.clone(),
         dwCursorPosition: zc.clone(),
         wAttributes: 0,
         srWindow: SMALL_RECT { Left:0, Top: 0, Right: 0, Bottom: 0 },
         dwMaximumWindowSize: zc
-    };*/
-    let success: bool = unsafe {
+};*/
+    let info = unsafe {
         // https://msdn.microsoft.com/en-us/library/windows/desktop/ms683171(v=vs.85).aspx
+        let mut info = ::std::mem::uninitialized();
         let result = GetConsoleScreenBufferInfo(handle, &mut info);
         println!("result was {}", result);
         if result == 0 {
             println!("last error was {:?}", GetLastError());
+            None
+        } else {
+            Some(info)
         }
-        result != 0
     };
     println!("info {:?}", info);
-    if success {
-        Some(
-            Size {
-                rows: (info.srWindow.Bottom - info.srWindow.Top + 1) as u16,
-                cols: (info.srWindow.Right - info.srWindow.Left + 1) as u16
-            }
-        )
-    } else {
-        None
-    }
+    info.map(|inf| {
+        Size {
+            rows: (inf.srWindow.Bottom - inf.srWindow.Top + 1) as u16,
+            cols: (inf.srWindow.Right - inf.srWindow.Left + 1) as u16
+        }
+    })
 }
