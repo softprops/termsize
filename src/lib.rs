@@ -17,7 +17,7 @@ pub struct Size {
     /// number of rows
     pub rows: u16,
     /// number of columns
-    pub cols: u16
+    pub cols: u16,
 }
 
 #[cfg(unix)]
