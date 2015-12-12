@@ -2,6 +2,7 @@ extern crate winapi;
 extern crate kernel32;
 
 use self::super::Size;
+use std::ptr;
 
 /// Gets the current terminal size
 pub fn get() -> Option<Size> {
