@@ -2,14 +2,8 @@ extern crate libc;
 extern crate atty;
 
 use self::super::Size;
-use self::libc::{c_ulong, c_ushort, STDOUT_FILENO};
+use self::libc::{c_ushort, STDOUT_FILENO, TIOCGWINSZ};
 use self::libc::ioctl;
-
-#[cfg(not(target_os = "macos"))]
-const TIOCGWINSZ: c_ulong = 0x00005413;
-
-#[cfg(target_os = "macos")]
-const TIOCGWINSZ: c_ulong = 0x40087468;
 
 /// A representation of the size of the current terminal
 #[repr(C)]
