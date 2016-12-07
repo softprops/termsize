@@ -1,3 +1,7 @@
+# 0.1.4
+
+* added support for [Fuchsia](https://en.wikipedia.org/wiki/Google_Fuchsia) OS [@antiagainst](https://github.com/softprops/termsize/pull/5)
+
 # 0.1.3
 
 * add support for new targets arm-unknown-linux-gnueabihf and armv7-unknown-linux-gnueabihf [@wimh](https://github.com/softprops/termsize/pull/3)
