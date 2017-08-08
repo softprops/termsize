@@ -12,6 +12,9 @@ matrix:
   - rust: stable
   - rust: stable
     os: osx
+  allow_failures:
+    - rust: nightly
+
 cache:
   cargo: true
   apt: true
@@ -26,6 +29,10 @@ addons:
     - libdw-dev
     - binutils-dev # required for `kcov --verify`
     - libbfd-dev # required for `kcov --verify`
+
+# https://github.com/travis-ci/travis-ci/issues/7669#issuecomment-299149209
+before_install:
+  - stty cols 80
 
 script:
 - cargo build
