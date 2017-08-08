@@ -4,9 +4,16 @@ matrix:
   fast_finish: true
   include:
   - rust: nightly
+  - rust: nightly
+    os: osx
   - rust: beta
+  - rust: beta
+    os: osx
   - rust: stable
+  - rust: stable
+    os: osx
 cache:
+  cargo: true
   apt: true
   directories:
   - target/debug/deps
@@ -19,9 +26,7 @@ addons:
     - libdw-dev
     - binutils-dev # required for `kcov --verify`
     - libbfd-dev # required for `kcov --verify`
-os:
- - linux
- - osx
+
 script:
 - cargo build
 - cargo test
