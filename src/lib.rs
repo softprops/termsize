@@ -18,6 +18,12 @@ pub struct Size {
     pub rows: u16,
     /// number of columns
     pub cols: u16,
+
+    /// width in pixels
+    pub width: Option<u16>,
+
+    /// height in pixels
+    pub height: Option<u16>,
 }
 
 #[cfg(unix)]

@@ -2,20 +2,8 @@ extern crate libc;
 extern crate atty;
 
 use self::super::Size;
-use self::libc::{c_ushort, STDOUT_FILENO, TIOCGWINSZ};
+use self::libc::{STDOUT_FILENO, winsize, TIOCGWINSZ};
 use self::libc::ioctl;
-
-/// A representation of the size of the current terminal
-#[repr(C)]
-#[derive(Debug)]
-pub struct UnixSize {
-    /// number of rows
-    pub rows: c_ushort,
-    /// number of columns
-    pub cols: c_ushort,
-    x: c_ushort,
-    y: c_ushort,
-}
 
 /// Gets the current terminal size
 pub fn get() -> Option<Size> {
@@ -23,17 +11,20 @@ pub fn get() -> Option<Size> {
     if atty::isnt() {
         return None;
     }
-    let us = UnixSize {
-        rows: 0,
-        cols: 0,
-        x: 0,
-        y: 0,
+    let mut us = winsize {
+        ws_row: 0,
+        ws_col: 0,
+        ws_xpixel: 0,
+        ws_ypixel: 0,
     };
-    let r = unsafe { ioctl(STDOUT_FILENO, TIOCGWINSZ, &us) };
+    let r = unsafe { ioctl(STDOUT_FILENO, TIOCGWINSZ, &mut us) };
     if r == 0 {
         Some(Size {
-            rows: us.rows,
-            cols: us.cols,
+            rows: us.ws_row,
+            cols: us.ws_col,
+
+            width: if us.ws_xpixel == 0 { None } else { Some(us.ws_xpixel) },
+            height: if us.ws_ypixel == 0 { None } else { Some(us.ws_ypixel) },
         })
     } else {
         None
@@ -76,7 +67,7 @@ mod tests {
         let mut data = stdout.split_whitespace();
         let rs = data.next().unwrap().parse::<u16>().unwrap();
         let cs = data.next().unwrap().parse::<u16>().unwrap();
-        if let Some(Size { rows, cols }) = get() {
+        if let Some(Size { rows, cols, .. }) = get() {
             assert_eq!(rows, rs);
             assert_eq!(cols, cs);
         }

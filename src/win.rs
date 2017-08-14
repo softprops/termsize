@@ -34,6 +34,9 @@ pub fn get() -> Option<Size> {
         Size {
             rows: (inf.srWindow.Bottom - inf.srWindow.Top + 1) as u16,
             cols: (inf.srWindow.Right - inf.srWindow.Left + 1) as u16,
+
+            width: None,
+            height: None,
         }
     })
 }
