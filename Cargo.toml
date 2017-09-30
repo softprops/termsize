@@ -1,6 +1,6 @@
 [package]
 name = "termsize"
-version = "0.1.4"
+version = "0.1.5"
 authors = ["softprops <d.tangren@gmail.com>"]
 description = "Retrieves terminal size"
 repository = "https://github.com/softprops/termsize"
@@ -8,6 +8,11 @@ homepage = "https://github.com/softprops/termsize"
 documentation = "http://softprops.github.io/termsize"
 keywords = ["tty", "terminal", "term", "size", "dimensions"]
 license = "MIT"
+readme = "README.md"
+
+[badges]
+travis-ci = { repository = "softprops/termsize" }
+coveralls = { repository = "softprops/termsize" }
 
 [target.'cfg(unix)'.dependencies]
 atty = "0.1"
