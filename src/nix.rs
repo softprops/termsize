@@ -20,7 +20,7 @@ pub struct UnixSize {
 /// Gets the current terminal size
 pub fn get() -> Option<Size> {
     // http://rosettacode.org/wiki/Terminal_control/Dimensions#Library:_BSD_libc
-    if atty::isnt() {
+    if atty::isnt(atty::Stream::Stdout) {
         return None;
     }
     let us = UnixSize {
