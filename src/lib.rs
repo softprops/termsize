@@ -1,17 +1,18 @@
 #![deny(missing_docs)]
 
-//! termsize is a tiny crate that provides a simple
+//! Termsize is a tiny crate that provides a simple
 //! interface for retrieving the current
 //! [terminal interface](http://www.manpagez.com/man/4/tty/) size
 //!
 //! ```rust
 //! extern crate termsize;
+//!
 //! termsize::get().map(|size| {
 //!   println!("rows {} cols {}", size.rows, size.cols)
 //! });
 //! ```
 
-/// Size
+/// Container for number of rows and columns
 #[derive(Debug)]
 pub struct Size {
     /// number of rows
