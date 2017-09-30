@@ -1,5 +1,5 @@
 extern crate termsize;
 
 pub fn main() {
-  println!("{:?}", termsize::get().unwrap());
+    println!("{:?}", termsize::get().unwrap());
 }

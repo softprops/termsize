@@ -1,9 +1,9 @@
 extern crate libc;
 extern crate atty;
 
-use self::libc::{STDOUT_FILENO, TIOCGWINSZ, c_ushort};
-use self::libc::ioctl;
 use self::super::Size;
+use self::libc::{c_ushort, STDOUT_FILENO, TIOCGWINSZ};
+use self::libc::ioctl;
 
 /// A representation of the size of the current terminal
 #[repr(C)]
@@ -42,9 +42,9 @@ pub fn get() -> Option<Size> {
 
 #[cfg(test)]
 mod tests {
-    use super::get;
-    use super::super::Size;
     use std::process::{Command, Output, Stdio};
+    use super::super::Size;
+    use super::get;
 
     #[cfg(target_os = "macos")]
     fn stty_size() -> Output {
