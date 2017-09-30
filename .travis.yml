@@ -46,7 +46,13 @@ before_install:
       cmake -DCMAKE_INSTALL_PREFIX:PATH=$HOME/.kcov .. && make && make install && cd ../..
     fi
   - export PATH=$HOME/.kcov/bin:$PATH
-  - stty cols 80
+  - >
+    if [ "$TRAVIS_OS_NAME" == "linux" ]; then
+      stty cols 80
+    else
+      # man resize
+      echo "osx on travis doesnt support stty cols 80"
+    fi
 
 script:
 - cargo build
