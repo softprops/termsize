@@ -50,7 +50,7 @@ before_install:
 
 script:
 - cargo build
-- cargo test
+- RUSTFLAGS="$RUSTFLAGS -C link-dead-code" cargo test
 
 after_success:
   - '[ $TRAVIS_RUST_VERSION = stable ] &&
