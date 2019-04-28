@@ -1,6 +1,3 @@
-extern crate winapi;
-extern crate kernel32;
-
 use self::super::Size;
 use std::ptr;
 

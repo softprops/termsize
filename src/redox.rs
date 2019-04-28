@@ -1,5 +1,3 @@
-extern crate termion;
-
 use self::super::Size;
 
 /// Gets the current terminal size
