@@ -1,3 +1,7 @@
+# 0.1.6
+
+* fix `TIOCGWINSZ` size issue on FreeBSD [#6](https://github.com/softprops/termsize/pull/9)
+
 # 0.1.5
 
 * added support for [Redox OS](https://github.com/redox-os/redox) [@ids1024](https://github.com/softprops/termsize/pull/8)
