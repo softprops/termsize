@@ -29,7 +29,7 @@ pub fn get() -> Option<Size> {
         x: 0,
         y: 0,
     };
-    let r = unsafe { ioctl(STDOUT_FILENO, TIOCGWINSZ, &us) };
+    let r = unsafe { ioctl(STDOUT_FILENO, TIOCGWINSZ.into(), &us) };
     if r == 0 {
         Some(Size {
             rows: us.rows,
