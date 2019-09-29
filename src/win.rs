@@ -4,9 +4,10 @@ use std::ptr;
 /// Gets the current terminal size
 pub fn get() -> Option<Size> {
     // http://rosettacode.org/wiki/Terminal_control/Dimensions#Windows
-    use self::kernel32::{self, GetConsoleScreenBufferInfo};
-    use self::winapi::{self, CONSOLE_SCREEN_BUFFER_INFO, HANDLE,
-                       INVALID_HANDLE_VALUE};
+    use self::{
+        kernel32::{self, GetConsoleScreenBufferInfo},
+        winapi::{self, CONSOLE_SCREEN_BUFFER_INFO, HANDLE, INVALID_HANDLE_VALUE},
+    };
     let handle: HANDLE = unsafe {
         kernel32::CreateFileA(
             b"CONOUT$\0".as_ptr() as *const i8,
@@ -30,10 +31,8 @@ pub fn get() -> Option<Size> {
             Some(info)
         }
     };
-    info.map(|inf| {
-        Size {
-            rows: (inf.srWindow.Bottom - inf.srWindow.Top + 1) as u16,
-            cols: (inf.srWindow.Right - inf.srWindow.Left + 1) as u16,
-        }
+    info.map(|inf| Size {
+        rows: (inf.srWindow.Bottom - inf.srWindow.Top + 1) as u16,
+        cols: (inf.srWindow.Right - inf.srWindow.Left + 1) as u16,
     })
 }
