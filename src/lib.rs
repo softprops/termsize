@@ -31,11 +31,6 @@ mod win;
 #[cfg(windows)]
 pub use self::win::get;
 
-#[cfg(target_os = "redox")]
-mod redox;
-#[cfg(target_os = "redox")]
-pub use self::redox::get;
-
 #[cfg(test)]
 mod tests {
     use super::get;
