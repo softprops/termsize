@@ -22,14 +22,18 @@ pub struct Size {
 }
 
 #[cfg(unix)]
-mod nix;
-#[cfg(unix)]
-pub use self::nix::get;
+#[path = "nix.rs"]
+mod imp;
 
 #[cfg(windows)]
-mod win;
-#[cfg(windows)]
-pub use self::win::get;
+#[path = "win.rs"]
+mod imp;
+
+#[cfg(not(any(unix, windows)))]
+#[path = "other.rs"]
+mod imp;
+
+pub use imp::get;
 
 #[cfg(test)]
 mod tests {
