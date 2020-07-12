@@ -38,14 +38,6 @@ before_cache:
 
 # https://github.com/travis-ci/travis-ci/issues/7669#issuecomment-299149209
 before_install:
-  # install kcov
-  - >
-    if [ ! -d "$HOME/.kcov/bin" ]; then
-      wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz &&
-      tar xzf master.tar.gz && mkdir kcov-master/build && cd kcov-master/build &&
-      cmake -DCMAKE_INSTALL_PREFIX:PATH=$HOME/.kcov .. && make && make install && cd ../..
-    fi
-  - export PATH=$HOME/.kcov/bin:$PATH
   - >
     if [ "$TRAVIS_OS_NAME" == "linux" ]; then
       stty cols 80
@@ -58,19 +50,6 @@ script:
 - cargo build
 
 after_success:
-  - '[ $TRAVIS_RUST_VERSION = stable ] &&
-    [ $TRAVIS_BRANCH = master ] &&
-    [ $TRAVIS_PULL_REQUEST = false ] &&
-    (ls target/debug &&
-    RUSTFLAGS="-C link-dead-code" cargo test --no-run &&
-    for file in target/debug/termsize-*; do
-       if [[ "${file: -2}" != ".d" ]]; then
-         mkdir -p "target/cov/$(basename $file)";
-         kcov --exclude-pattern=/.cargo,/usr/lib --verify "target/cov/$(basename $file)" "$file";
-       fi;
-    done &&
-    kcov --coveralls-id=$COVERALLS_REPO_TOKEN --merge target/cov target/cov/* &&
-    echo "covered") || true'
   - '[ $TRAVIS_RUST_VERSION = stable ] &&
     [ $TRAVIS_BRANCH = master ] &&
     [ $TRAVIS_PULL_REQUEST = false ]
