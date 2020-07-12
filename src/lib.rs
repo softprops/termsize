@@ -7,9 +7,7 @@
 //! ```rust
 //! extern crate termsize;
 //!
-//! termsize::get().map(|size| {
-//!   println!("rows {} cols {}", size.rows, size.cols)
-//! });
+//! termsize::get().map(|size| println!("rows {} cols {}", size.rows, size.cols));
 //! ```
 
 /// Container for number of rows and columns
