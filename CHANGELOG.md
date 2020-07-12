@@ -1,3 +1,8 @@
+
+# 0.2.0
+
+* add shim for unsupported platforms [#14](https://github.com/softprops/termsize/pull/14)
+
 # 0.1.6
 
 * fix `TIOCGWINSZ` size issue on FreeBSD [#6](https://github.com/softprops/termsize/pull/9)
