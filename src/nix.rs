@@ -23,13 +23,13 @@ pub fn get() -> Option<Size> {
     if atty::isnt(atty::Stream::Stdout) {
         return None;
     }
-    let us = UnixSize {
+    let mut us = UnixSize {
         rows: 0,
         cols: 0,
         x: 0,
         y: 0,
     };
-    let r = unsafe { ioctl(STDOUT_FILENO, TIOCGWINSZ.into(), &us) };
+    let r = unsafe { ioctl(STDOUT_FILENO, TIOCGWINSZ.into(), &mut us) };
     if r == 0 {
         Some(Size {
             rows: us.rows,
