@@ -9,7 +9,7 @@ documentation = "http://softprops.github.io/termsize"
 keywords = ["tty", "terminal", "term", "size", "dimensions"]
 license = "MIT"
 readme = "README.md"
-edition = "2018"
+edition = "2021"
 
 [badges]
 travis-ci = { repository = "softprops/termsize" }
