@@ -1,3 +1,6 @@
+# 0.1.8
+
+* switch to gh actions for ci
 
 # 0.1.7
 
