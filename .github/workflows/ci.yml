@@ -24,29 +24,35 @@ jobs:
   codestyle:
     runs-on: ubuntu-latest
     steps:
-      - name: Set up Rust
+      - name: Setup Rust
         uses: hecrj/setup-rust-action@v2
         with:
           components: rustfmt
           rust-version: nightly
+      - name: Setup rust cache
+        uses: Swatinem/rust-cache@v2
       - uses: actions/checkout@v4
       - run: cargo fmt --all -- --check
 
   lint:
     runs-on: ubuntu-latest
     steps:
-      - name: Set up Rust
+      - name: Setup Rust
         uses: hecrj/setup-rust-action@v2
         with:
           components: clippy
+      - name: Setup rust cache
+        uses: Swatinem/rust-cache@v2
       - uses: actions/checkout@v4
       - run: cargo clippy --all-targets -- -D clippy::all
 
   compile:
     runs-on: ubuntu-latest
     steps:
-      - name: Set up Rust
+      - name: Setup Rust
         uses: hecrj/setup-rust-action@v2
+      - name: Setup rust cache
+        uses: Swatinem/rust-cache@v2
       - uses: actions/checkout@master
       - run: cargo check --all
 
@@ -59,6 +65,8 @@ jobs:
     steps:
     - name: Setup Rust
       uses: hecrj/setup-rust-action@v2
+    - name: Setup rust cache
+      uses: Swatinem/rust-cache@v2
     - name: Checkout
       uses: actions/checkout@v4
     - name: Test
