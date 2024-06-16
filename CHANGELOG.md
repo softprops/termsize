@@ -1,7 +1,9 @@
 
-# 0.2.0
+# 0.1.7
 
-* add shim for unsupported platforms [#14](https://github.com/softprops/termsize/pull/14)
+* add shim for unsupported platforms [#14](https://github.com/softprops/termsize/pull/14) via [@RReverser](https://github.com/RReverser)
+* Prevent the Unix implementation being optimised away in release modes [#18](https://github.com/softprops/termsize/pull/18) via [@dspeyrer](https://github.com/dspeyrer)
+
 
 # 0.1.6
 
