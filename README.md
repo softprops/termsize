@@ -12,7 +12,7 @@ your terminal's current size in rows and columns. On most unix systems, this is 
 
 ## install
 
-add the following to your `Cargo.toml` file
+run `cargo add termsize` in your terminal or add the following to your `Cargo.toml` file
 
 ```toml
 [dependencies]
@@ -26,10 +26,8 @@ exposing two fields: `rows` and `cols` representing the number of rows and colum
 a a terminal's stdout supports.
 
 ```rust
-extern crate termsize;
-
 pub fn main() {
-  termsize::get().map(|size| {
+  termsize::get().map(|{ rows, cols }| {
     println!("rows {} cols {}", size.rows, size.cols)
   });
 }
