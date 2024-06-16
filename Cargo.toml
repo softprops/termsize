@@ -11,9 +11,9 @@ license = "MIT"
 readme = "README.md"
 edition = "2021"
 
-[badges]
-travis-ci = { repository = "softprops/termsize" }
-coveralls = { repository = "softprops/termsize" }
+#[badges]
+#travis-ci = { repository = "softprops/termsize" }
+#coveralls = { repository = "softprops/termsize" }
 
 [target.'cfg(unix)'.dependencies]
 atty = "0.2"
