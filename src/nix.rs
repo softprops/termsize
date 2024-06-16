@@ -54,7 +54,7 @@ mod tests {
             .arg("size")
             .stderr(Stdio::inherit())
             .output()
-            .unwrap()
+            .expect("expected stty output")
     }
 
     #[cfg(not(target_os = "macos"))]
@@ -65,17 +65,25 @@ mod tests {
             .arg("size")
             .stderr(Stdio::inherit())
             .output()
-            .unwrap()
+            .expect("expected stty output")
     }
 
     #[test]
     fn test_shell() {
         let output = stty_size();
         assert!(output.status.success());
-        let stdout = String::from_utf8(output.stdout).unwrap();
+        let stdout = String::from_utf8(output.stdout).expect("expected utf8");
         let mut data = stdout.split_whitespace();
-        let rs = data.next().unwrap().parse::<u16>().unwrap();
-        let cs = data.next().unwrap().parse::<u16>().unwrap();
+        let rs = data
+            .next()
+            .expect("expected row")
+            .parse::<u16>()
+            .expect("expected u16 col");
+        let cs = data
+            .next()
+            .expect("expected col")
+            .parse::<u16>()
+            .expect("expected u16 col");
         if let Some(Size { rows, cols }) = get() {
             assert_eq!(rows, rs);
             assert_eq!(cols, cs);
