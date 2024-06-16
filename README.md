@@ -1,6 +1,6 @@
 # termsize
 
-[![Main](https://github.com/softprops/termsize/actions/workflows/ci.yml/badge.svg)](https://github.com/softprops/termsize/actions/workflows/ci.yml)
+[![CI](https://github.com/softprops/termsize/actions/workflows/ci.yml/badge.svg)](https://github.com/softprops/termsize/actions/workflows/ci.yml)
 [![Crates.io](https://img.shields.io/crates/v/termsize.svg)](https://crates.io/crates/termsize)
 
 > because terminal size matters
