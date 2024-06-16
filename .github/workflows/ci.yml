@@ -54,7 +54,7 @@ jobs:
       - name: Setup rust cache
         uses: Swatinem/rust-cache@v2
       - uses: actions/checkout@master
-      - run: cargo check --all
+      - run: cargo check --workspace
 
   test:
     needs: [codestyle, lint, compile]
