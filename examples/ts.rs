@@ -1,3 +1,6 @@
 pub fn main() {
-    println!("{:?}", termsize::get().unwrap());
+    match termsize::get() {
+        Some(size) => println!("{:?}", size),
+        _ => println!("not a term"),
+    }
 }

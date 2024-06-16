@@ -1,0 +1,75 @@
+
+name: Main
+
+on:
+  push:
+    paths-ignore:
+      - '*.md'
+    branches:
+      - main
+      - master
+    tags:
+      - '**'
+  pull_request:
+    paths-ignore:
+      - '*.md'
+    branches:
+      - main
+      - master
+
+env:
+  CARGO_TERM_COLOR:  always
+
+jobs:
+  codestyle:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Rust
+        uses: hecrj/setup-rust-action@v2
+        with:
+          components: rustfmt
+          rust-version: nightly
+      - name: Setup rust cache
+        uses: Swatinem/rust-cache@v2
+      - uses: actions/checkout@v4
+      - run: cargo fmt --all -- --check
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Rust
+        uses: hecrj/setup-rust-action@v2
+        with:
+          components: clippy
+      - name: Setup rust cache
+        uses: Swatinem/rust-cache@v2
+      - uses: actions/checkout@v4
+      - run: cargo clippy --all-targets -- -D clippy::all
+
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Rust
+        uses: hecrj/setup-rust-action@v2
+      - name: Setup rust cache
+        uses: Swatinem/rust-cache@v2
+      - uses: actions/checkout@master
+      - run: cargo check --all
+
+  test:
+    needs: [codestyle, lint, compile]
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+    - name: Setup Rust
+      uses: hecrj/setup-rust-action@v2
+    - name: Setup rust cache
+      uses: Swatinem/rust-cache@v2
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Test
+      # because ci doesn't run in a tty env, running test will fail
+      # by we can at the very least make sure we compile on all supported os's
+      run: cargo check

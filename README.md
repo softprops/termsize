@@ -1,6 +1,6 @@
 # termsize
 
-[![Build Status](https://travis-ci.org/softprops/termsize.svg)](https://travis-ci.org/softprops/termsize) [![Build status](https://ci.appveyor.com/api/projects/status/ilics7dppw0vl6gb?svg=true)](https://ci.appveyor.com/project/softprops/termsize) [![Coverage Status](https://coveralls.io/repos/softprops/termsize/badge.svg?branch=master&service=github)](https://coveralls.io/github/softprops/termsize?branch=master)
+
 
 > because terminal size matters
 
