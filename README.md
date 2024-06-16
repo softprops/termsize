@@ -35,4 +35,4 @@ pub fn main() {
 }
 ```
 
-Doug Tangren (softprops) 2015-2017
+Doug Tangren (softprops) 2015-2024
