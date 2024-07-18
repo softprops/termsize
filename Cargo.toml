@@ -16,7 +16,6 @@ edition = "2021"
 #coveralls = { repository = "softprops/termsize" }
 
 [target.'cfg(unix)'.dependencies]
-atty = "0.2"
 libc = "0.2"
 
 [target.'cfg(windows)'.dependencies]
