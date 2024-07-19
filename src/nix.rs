@@ -1,8 +1,10 @@
 extern crate libc;
 
+use std::io::IsTerminal;
+
 use self::{
     super::Size,
-    libc::{c_ushort, ioctl, isatty, STDOUT_FILENO, TIOCGWINSZ},
+    libc::{c_ushort, ioctl, STDOUT_FILENO, TIOCGWINSZ},
 };
 
 /// A representation of the size of the current terminal
@@ -20,7 +22,7 @@ pub struct UnixSize {
 /// Gets the current terminal size
 pub fn get() -> Option<Size> {
     // http://rosettacode.org/wiki/Terminal_control/Dimensions#Library:_BSD_libc
-    if unsafe { isatty(STDOUT_FILENO) == 0 } {
+    if !std::io::stdout().is_terminal() {
         return None;
     }
     let mut us = UnixSize {
