@@ -10,6 +10,7 @@ keywords = ["tty", "terminal", "term", "size", "dimensions"]
 license = "MIT"
 readme = "README.md"
 edition = "2021"
+rust-version = "1.70"
 
 #[badges]
 #travis-ci = { repository = "softprops/termsize" }
