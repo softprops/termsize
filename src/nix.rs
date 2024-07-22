@@ -1,5 +1,6 @@
-extern crate atty;
 extern crate libc;
+
+use std::io::IsTerminal;
 
 use self::{
     super::Size,
@@ -21,7 +22,7 @@ pub struct UnixSize {
 /// Gets the current terminal size
 pub fn get() -> Option<Size> {
     // http://rosettacode.org/wiki/Terminal_control/Dimensions#Library:_BSD_libc
-    if atty::isnt(atty::Stream::Stdout) {
+    if !std::io::stdout().is_terminal() {
         return None;
     }
     let mut us = UnixSize {
