@@ -1,3 +1,7 @@
+# 0.1.9
+
+* drop `atty` dependency in favor of `std.io.IsTerminal`
+
 # 0.1.8
 
 * switch to gh actions for ci
