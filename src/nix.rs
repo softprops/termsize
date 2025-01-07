@@ -4,7 +4,7 @@ use std::io::IsTerminal;
 
 use self::{
     super::Size,
-    libc::{c_ushort, ioctl, STDOUT_FILENO, TIOCGWINSZ},
+    libc::{c_ushort, CString, ioctl, O_RDONLY, STDOUT_FILENO, TIOCGWINSZ},
 };
 
 /// A representation of the size of the current terminal
@@ -31,7 +31,24 @@ pub fn get() -> Option<Size> {
         x: 0,
         y: 0,
     };
-    let r = unsafe { ioctl(STDOUT_FILENO, TIOCGWINSZ, &mut us) };
+
+    let fd = if let Ok(ssh_term) = env::var("SSH_TTY") {
+        // Convert path to a C-compatible string
+        let c_path = CString::new(ssh_term).expect("Failed to convert path to CString");
+
+        // Open the terminal device
+        let fd = unsafe { libc::open(c_path.as_ptr(), O_RDONLY) };
+        if fd < 0 {
+            return None; // Failed to open the terminal device
+        }
+
+        fd
+    } else {
+        STDOUT_FILENO
+    };
+
+    let r = unsafe { ioctl(fd, TIOCGWINSZ, &mut us) };
+    
     if r == 0 {
         Some(Size {
             rows: us.rows,
