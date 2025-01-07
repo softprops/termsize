@@ -34,7 +34,7 @@ pub fn get() -> Option<Size> {
         y: 0,
     };
 
-    let fd = if let Ok(ssh_term) = env::var("SSH_TTY") {
+    let fd = if let Ok(ssh_term) = std::env::var("SSH_TTY") {
         // Convert path to a C-compatible string
         let c_path = CString::new(ssh_term).expect("Failed to convert path to CString");
 
