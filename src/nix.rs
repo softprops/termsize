@@ -50,6 +50,11 @@ pub fn get() -> Option<Size> {
     };
 
     let r = unsafe { ioctl(fd, TIOCGWINSZ, &mut us) };
+
+    // Closing the open file descriptor
+    if fd != STDOUT_FILENO {
+        unsafe { libc::close(fd); }
+    }
     
     if r == 0 {
         Some(Size {
