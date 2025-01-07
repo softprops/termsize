@@ -2,9 +2,11 @@ extern crate libc;
 
 use std::io::IsTerminal;
 
+use std::ffi::{c_ushort, CString};
+
 use self::{
     super::Size,
-    libc::{c_ushort, CString, ioctl, O_RDONLY, STDOUT_FILENO, TIOCGWINSZ},
+    libc::{ioctl, O_RDONLY, STDOUT_FILENO, TIOCGWINSZ},
 };
 
 /// A representation of the size of the current terminal
